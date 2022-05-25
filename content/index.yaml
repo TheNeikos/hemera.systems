@@ -5,7 +5,7 @@ page:
   siteTitle: Hemera's Zettelkasten
 
 template:
-  theme: orange
+  theme: orange-600
 
   # Uncomment this to get neuron-style pages
   # name: /templates/layouts/note
@@ -18,3 +18,9 @@ template:
 
   # If you are hosting on GitLab Pages, you may want to remove this.
   urlStrategy: pretty
+  iconUrl: ${ema:homeUrl}favicon.png
+
+page:
+  headHtml: |
+    <snippet var="js.mathjax" />
+    <snippet var="js.prism" />

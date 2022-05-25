@@ -7,3 +7,7 @@
     </svg>
   </a>
 </div>
+<hr class="m-2">
+<div class="flex items-center">
+  <img src="/hemera_laptop.png" alt="Hemera sitting in front of a laptop with a NixOS logo on it.">
+</div>
