@@ -5,14 +5,14 @@
   <meta charset='UTF-8' />
   <meta name='viewport' content='width=device-width, initial-scale=1' />
   <title>
-    Hemera’s Zettelkasten – My Emanote Site
+    Being Dynamic in a Static Language – My Emanote Site
   </title>
   
     
       <meta property='og:description' content />
       <meta property='og:site_name' content='My Emanote Site' />
       <meta property='og:type' content='website' />
-      <meta property='og:title' content='Hemera’s Zettelkasten' />
+      <meta property='og:title' content='Being Dynamic in a Static Language' />
     
     
       <base href='/' />
@@ -104,6 +104,35 @@
             
           
         </li>
+        
+          
+            <li class='inline-flex items-center'>
+              <a class='px-1 font-bold' href=''>
+                Hemera’s Zettelkasten
+              </a>
+              <svg fill='currentColor' viewBox='0 0 20 20' class='w-auto h-5 text-gray-400'>
+                <path fill-rule='evenodd' d='M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z' clip-rule='evenodd'></path>
+              </svg>
+            </li>
+          
+            <li class='inline-flex items-center'>
+              <a class='px-1 font-bold' href='programming'>
+                programming
+              </a>
+              <svg fill='currentColor' viewBox='0 0 20 20' class='w-auto h-5 text-gray-400'>
+                <path fill-rule='evenodd' d='M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z' clip-rule='evenodd'></path>
+              </svg>
+            </li>
+          
+            <li class='inline-flex items-center'>
+              <a class='px-1 font-bold' href='programming/rust'>
+                rust
+              </a>
+              <svg fill='currentColor' viewBox='0 0 20 20' class='w-auto h-5 text-gray-400'>
+                <path fill-rule='evenodd' d='M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z' clip-rule='evenodd'></path>
+              </svg>
+            </li>
+          
         
       </ul>
     </div>
@@ -312,11 +341,7 @@
     
       <!-- Variable bindings for this tree-->
   
-    
-      
-    
-    
-
+  
 
 
   
@@ -329,12 +354,12 @@
     
     
       <svg class='w-4 h-4 flex-shrink-0 inline' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
-        <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z'>
+        <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'>
         </path>
       </svg>
-    
+      
   
-    <a class='hover:underline truncate' title='Being Dynamic in a Static Language' href='programming/rust/dynamic_in_static'>
+    <a class='font-bold text-orange-600-600 hover:underline truncate' title='Being Dynamic in a Static Language' href='programming/rust/dynamic_in_static'>
       Being Dynamic in a Static Language
     </a>
     
@@ -364,18 +389,194 @@
           <main class='px-4 py-4'>
             <h1 class='flex items-end justify-center mb-4 p-3 bg-orange-600-100 text-5xl font-extrabold text-black rounded'>
   <a class='z-40 tracking-tighter '>
-    Hemera’s Zettelkasten
+    Being Dynamic in a Static Language
   </a>
 </h1>
             <article class='overflow-auto'>
   <!-- What goes in this file will appear on top of note body-->
   
     <p class='mb-3'>
-      Heya to my little space on the internet. Check out anything that might interest you on the left! I’ve tried my best to order things!
+      <a href='https://rust-lang.org' class='text-orange-600-600 hover:underline' target='_blank' rel='noopener'>Rust</a> is a statically compiled language. As such it excels, and is geared towards, static program structures. This means that some restrictions apply:
     </p>
   
+    <ul class='my-3 ml-6 space-y-1 list-disc'>
+      
+        <li>
+          Every type needs to have a known size or, if its a trait, it needs to be behind a <code class='py-0.5 px-0.5 bg-gray-100'>dyn T</code> reference
+        </li>
+      
+        <li>
+          Traits need to be <a href='https://doc.rust-lang.org/reference/items/traits.html#object-safety' class='text-orange-600-600 hover:underline' target='_blank' rel='noopener'>object safe</a> to qualify being allowed in a <code class='py-0.5 px-0.5 bg-gray-100'>dyn T</code> reference
+        </li>
+      
+    </ul>
+  
+    <p class='mb-3'>
+      During my work the following requirements came up:
+    </p>
+  
+    <ul class='my-3 ml-6 space-y-1 list-decimal list-inside'>
+      
+        <li>
+          Have a known list of possible components
+        </li>
+      
+        <li>
+          Be able to instantiate any number and combination of these components
+        </li>
+      
+        <li>
+          Establish <em>typed</em> connections between the instances of the components
+        </li>
+      
+    </ul>
+  
+    <p class='mb-3'>
+      In this case, the idea is be to have a precompiled binary that is ‘batteries-included’ in which the user can then activate a number of instances of its components and wire-up a data flow between them. After several months of trying out different systems and continously refining our ideas we’ve found a nice pattern that I want to document here.
+    </p>
+  <hr class='mb-3' /><h2 id='laying-the-groundwork' class='inline-block mt-6 mb-4 text-4xl font-bold text-gray-700 border-b-2'>Laying the groundwork</h2>
+    <p class='mb-3'>
+      Let’s assume the components we care about are called ’Plugin’s. So we will need a trait for that:
+    </p>
+  <div class='py-0.5 mb-3 text-sm'><pre><code class='rust language-rust'>trait Plugin {
+    async fn starting(&mut self) -&gt; Result&lt;()&gt; {
+        Ok(())
+    }
+    async fn run(&self) -&gt; Result&lt;()&gt;;
+    async fn stopping(&mut self) -&gt; Result&lt;()&gt; {
+        Ok(())
+    }
+}</code></pre></div>
+    <p class='mb-3'>
+      (I’m using async fns in traits, if that’s not yet available feel free to use <a href='https://docs.rs/async-trait' class='text-orange-600-600 hover:underline' target='_blank' rel='noopener'><code class='py-0.5 px-0.5 bg-gray-100'>async-trait</code></a> to work around it.)
+    </p>
+  
+    <p class='mb-3'>
+      The <code class='py-0.5 px-0.5 bg-gray-100'>Plugin</code> trait will be the heart piece of this whole endeavour. It can be used as such for example:
+    </p>
+  <div class='py-0.5 mb-3 text-sm'><pre><code class='rust language-rust'>
+struct WatchFolder {
+    path: PathBuf,
+}
+
+impl Plugin for WatchFolder {
+    async fn run(&self) -&gt; Result&lt;()&gt; {
+        while let Ok(event) = watch_folder(self.path).await {
+            info!(?event, "Received folder event");
+        }
+    }
+}</code></pre></div>
+    <blockquote class='py-0.5 px-4 mb-3 italic border-l-4 bg-gray-50 text-gray-600 border-gray-400 quote'>
+      
+    <p class='mb-3'>
+      What is that <code class='py-0.5 px-0.5 bg-gray-100'>watch_folder</code> function and the <code class='py-0.5 px-0.5 bg-gray-100'>info!</code> macro? And why are you not specifiying the Error in those <code class='py-0.5 px-0.5 bg-gray-100'>Results</code>?
+    </p>
+  
+    </blockquote>
+  
+    <p class='mb-3'>
+      Good that you mention those Neikos, they are just placeholders, so that anyone reading this don’t have to think in ‘foos’ or ‘bars’ and instead can just focus on the meat of the issue. Whereas for the error type, its not important and readers are expected to fill that in. It’s not meant to be copy-pasted!
+    </p>
+  
+    <blockquote class='py-0.5 px-4 mb-3 italic border-l-4 bg-gray-50 text-gray-600 border-gray-400 quote'>
+      
+    <p class='mb-3'>
+      Won’t it just confuse them even more?
+    </p>
+  
+    </blockquote>
+  
+    <p class='mb-3'>
+      Maybe? But who knows, I prefer writing semi-realistic code. Moving on…
+    </p>
+  
+    <p class='mb-3'>
+      Now that we’ve seen how the <code class='py-0.5 px-0.5 bg-gray-100'>Plugin</code> object is meant to be seen, let’s use it!
+    </p>
+  <div class='py-0.5 mb-3 text-sm'><pre><code class='rust language-rust'>async fn main() -&gt; Result&lt;()&gt; {
+    let mut watcher = WatchFolder { path: PathBuf::from("./src") };
+
+    watcher.starting().await?;
+    watcher.run().await?;
+    watcher.stopping().await?;
+}</code></pre></div>
+    <p class='mb-3'>
+      Great! That’s easy and fairly straightforward. Now comes the first hurdle. We want to spawn several of them. How could we do this?
+    </p>
+  
+    <p class='mb-3'>
+      Well, we’re programmers, and if we have several, we’ll just loop!
+    </p>
+  <div class='py-0.5 mb-3 text-sm'><pre><code class='rust language-rust'>async fn main() -&gt; Result&lt;()&gt; {
+    let paths = ["./src", "/etc/hosts"];
+
+    let watchers = paths.iter()
+        .map(|p| WatchFolder { path: p.into() })
+        .collect::&lt;Vec&lt;_&gt;&gt;();
+
+    for watcher in watchers {
+        watcher.starting().await?;
+    }
+
+    let done_watchers = watchers
+        .into_iter()
+        .map(|watcher| async move {
+            watcher.run().await; 
+            watcher 
+        })
+        .collect::&lt;FuturesUnordered&gt;()
+        .collect::&lt;Result&lt;Vec&lt;_&gt;&gt;&gt;().await?;
+
+    for watcher in watchers {
+        watcher.stopping().await?;
+    }
+}</code></pre></div>
+    <blockquote class='py-0.5 px-4 mb-3 italic border-l-4 bg-gray-50 text-gray-600 border-gray-400 quote'>
+      
+    <p class='mb-3'>
+      Whew that got more complicated!
+    </p>
+  
+    </blockquote>
+  
+    <p class='mb-3'>
+      Yeah, well we’re doing async stuff! But don’t worry, it’s all fairly straightforward:
+    </p>
+  
+    <ul class='my-3 ml-6 space-y-1 list-disc'>
+      
+        <li>
+          First we get a list of paths (Could just as well be from user input, or a config file, etc…)
+        </li>
+      
+        <li>
+          We then <code class='py-0.5 px-0.5 bg-gray-100'>.iter</code>ate over that list and construct some <code class='py-0.5 px-0.5 bg-gray-100'>WatchFolder</code> instances, and put everything into a <code class='py-0.5 px-0.5 bg-gray-100'>Vec</code>
+        </li>
+      
+        <li>
+          We then start each of them one after the other
+        </li>
+      
+        <li>
+          Then, I create a future, <em>but don’t await it yet</em>, which I then collect into a <code class='py-0.5 px-0.5 bg-gray-100'>FuturesUnordered</code> through the <code class='py-0.5 px-0.5 bg-gray-100'>Extend</code> trait.
+        </li>
+      
+        <li>
+          Since <code class='py-0.5 px-0.5 bg-gray-100'>FuturesUnordered</code> is a <code class='py-0.5 px-0.5 bg-gray-100'>Stream</code> I can then collect from that and make it a <code class='py-0.5 px-0.5 bg-gray-100'>Result&lt;Vec&lt;_&gt;&gt;</code>, pass on any errors and get back the watchers!
+    <ul class='my-3 ml-6 space-y-1 list-disc'>
+      
+        <li>
+          They had to be moved into the future, since we don’t want to have borrows in our <code class='py-0.5 px-0.5 bg-gray-100'>Future</code>s (its generally a headache)
+        </li>
+      
+    </ul>
+  
+        </li>
+      
+    </ul>
+  
   <div class='flex items-center justify-center mt-2'>
-  <a class='text-gray-300 hover:text-orange-600-600 text-sm' title='Edit this page on GitHub' href='https://github.com/TheNeikos/hemera.systems/edit/master/content/index.md'>
+  <a class='text-gray-300 hover:text-orange-600-600 text-sm' title='Edit this page on GitHub' href='https://github.com/TheNeikos/hemera.systems/edit/master/content/programming/rust/dynamic_in_static.md'>
     <svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
       <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z'></path>
     </svg>
