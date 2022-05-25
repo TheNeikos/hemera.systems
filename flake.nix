@@ -16,7 +16,7 @@
           pkgs = nixpkgs.legacyPackages.${system};
         in
         rec {
-          defautPackage = packages.default;
+          defaultPackage = packages.default;
           defaultApp = apps.default;
           apps = {
             default = rec {
