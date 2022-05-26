@@ -5,12 +5,12 @@
   <meta charset='UTF-8' />
   <meta name='viewport' content='width=device-width, initial-scale=1' />
   <title>
-    Being Dynamic in a Static Language – My Emanote Site
+    Being Dynamic in a Static Language – Hemera's Zettelbox
   </title>
   
     
       <meta property='og:description' content />
-      <meta property='og:site_name' content='My Emanote Site' />
+      <meta property='og:site_name' content="Hemera's Zettelbox" />
       <meta property='og:type' content='website' />
       <meta property='og:title' content='Being Dynamic in a Static Language' />
     
@@ -35,7 +35,7 @@
 
 
   
-  <link href='tailwind.css?instanceId=462b44f4-eedb-438b-91eb-ddf64fa5d309' rel='stylesheet' type='text/css' />
+  <link href='tailwind.css?instanceId=4997bcad-d436-4073-9a0c-b441c1861d70' rel='stylesheet' type='text/css' />
 
   <!-- Heist error element -->
   <style type='text/css'>
@@ -108,7 +108,7 @@
           
             <li class='inline-flex items-center'>
               <a class='px-1 font-bold' href=''>
-                Hemera’s Zettelkasten
+                Welcome
               </a>
               <svg fill='currentColor' viewBox='0 0 20 20' class='w-auto h-5 text-gray-400'>
                 <path fill-rule='evenodd' d='M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z' clip-rule='evenodd'></path>
@@ -126,7 +126,7 @@
           
             <li class='inline-flex items-center'>
               <a class='px-1 font-bold' href='programming/rust'>
-                rust
+                Rust
               </a>
               <svg fill='currentColor' viewBox='0 0 20 20' class='w-auto h-5 text-gray-400'>
                 <path fill-rule='evenodd' d='M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z' clip-rule='evenodd'></path>
@@ -327,8 +327,8 @@
       </svg>
       
   
-    <a class='font-bold hover:underline truncate' title='rust' href='programming/rust'>
-      rust
+    <a class='font-bold hover:underline truncate' title='Rust' href='programming/rust'>
+      Rust
     </a>
     
       
@@ -396,7 +396,7 @@
   <!-- What goes in this file will appear on top of note body-->
   
     <p class='mb-3'>
-      <a href='https://rust-lang.org' class='text-orange-600-600 hover:underline' target='_blank' rel='noopener'>Rust</a> is a statically compiled language. As such it excels, and is geared towards, static program structures. This means that some restrictions apply:
+      <a href='programming/rust' class='text-orange-600-600 mavenLinkBold hover:underline' data-wikilink-type='WikiLinkNormal'>Rust</a> is a statically compiled language. As such it excels, and is geared towards, static program structures. This means that some restrictions apply:
     </p>
   
     <ul class='my-3 ml-6 space-y-1 list-disc'>
@@ -433,6 +433,10 @@
   
     <p class='mb-3'>
       In this case, the idea is be to have a precompiled binary that is ‘batteries-included’ in which the user can then activate a number of instances of its components and wire-up a data flow between them. After several months of trying out different systems and continously refining our ideas we’ve found a nice pattern that I want to document here.
+    </p>
+  
+    <p class='mb-3'>
+      <strong>Note</strong>: This is not a tutorial, and more of a guided explanation. <strong>Rust knowledge is required!</strong>
     </p>
   <hr class='mb-3' /><h2 id='laying-the-groundwork' class='inline-block mt-6 mb-4 text-4xl font-bold text-gray-700 border-b-2'>Laying the groundwork</h2>
     <p class='mb-3'>
@@ -475,7 +479,7 @@ impl Plugin for WatchFolder {
     </blockquote>
   
     <p class='mb-3'>
-      Good that you mention those Neikos, they are just placeholders, so that anyone reading this don’t have to think in ‘foos’ or ‘bars’ and instead can just focus on the meat of the issue. Whereas for the error type, its not important and readers are expected to fill that in. It’s not meant to be copy-pasted!
+      Good that you mention those Neikos, they are just placeholders, so that anyone reading this doesn’t have to think in ‘foos’ or ‘bars’ and instead can just focus on the heart of the issue. Whereas for the error type, its not important and readers are expected to fill that in. It’s not meant to be copy-pasted!
     </p>
   
     <blockquote class='py-0.5 px-4 mb-3 italic border-l-4 bg-gray-50 text-gray-600 border-gray-400 quote'>
@@ -571,6 +575,136 @@ impl Plugin for WatchFolder {
       
     </ul>
   
+        </li>
+      
+    </ul>
+  <h2 id='stepping-up-the-difficulty' class='inline-block mt-6 mb-4 text-4xl font-bold text-gray-700 border-b-2'>Stepping up the difficulty</h2>
+    <p class='mb-3'>
+      What if we now have multiple <em>kinds</em> of plugins? Let’s define a new one!
+    </p>
+  <div class='py-0.5 mb-3 text-sm'><pre><code class='rust language-rust'>struct SimpleWebserver {
+    port: u16,
+    directory: PathBuf,
+    server_handle: Option&lt;ServerHandle&gt;,
+}
+
+impl SimpleWebserver {
+    pub fn new(port: u16, directory: PathBuf) -&gt; Self {
+        SimpleWebserver {
+            port, 
+            directory, 
+            server_handle: None,
+        }
+    }
+}
+
+impl Plugin for SimpleWebserver {
+    async fn starting(&mut self) -&gt; Result&lt;()&gt; {
+        self.server_handle = Some(webserver::start(self.port, &self.directory).await?);
+
+        Ok(())
+    }
+}</code></pre></div>
+    <blockquote class='py-0.5 px-4 mb-3 italic border-l-4 bg-gray-50 text-gray-600 border-gray-400 quote'>
+      
+    <p class='mb-3'>
+      What does the webserver do?
+    </p>
+  
+    </blockquote>
+  
+    <p class='mb-3'>
+      That’s just a detail, it could do whatever you want! It’s just Rust code after all.
+    </p>
+  
+    <p class='mb-3'>
+      Now, let’s try to instantiate both a <code class='py-0.5 px-0.5 bg-gray-100'>WatchFolder</code> and a <code class='py-0.5 px-0.5 bg-gray-100'>SimpleWebserver</code>!
+    </p>
+  <div class='py-0.5 mb-3 text-sm'><pre><code class='rust language-rust'>async fn main() -&gt; Result&lt;()&gt; {
+    let plugins = vec![WatchFolder { path: PathBuf::from("./src") }, SimpleWebserver::new(3456, PathBuf::from(".")];
+
+    // .. call starting, run, and stopping
+}</code></pre></div>
+    <blockquote class='py-0.5 px-4 mb-3 italic border-l-4 bg-gray-50 text-gray-600 border-gray-400 quote'>
+      
+    <p class='mb-3'>
+      Oh-oh! That doesn’t compile! They are not of the same type.
+    </p>
+  
+    </blockquote>
+  
+    <p class='mb-3'>
+      Yup, and now we’re leaving the static world and making our first steps into the dynamic world.
+    </p>
+  <h4 id='trait-objects-to-the-rescue' class='mt-6 mb-2 text-2xl font-bold text-gray-700'>Trait Objects to the rescue</h4>
+    <p class='mb-3'>
+      All the way at the top, we’ve defined our <code class='py-0.5 px-0.5 bg-gray-100'>Plugin</code> trait. It’s a fairly simple trait, and thus allows us to pack it behind a fat pointer and ‘erase’ the concrete type, keeping only the information conveyed by the <code class='py-0.5 px-0.5 bg-gray-100'>Plugin</code> trait. This is then called a ‘Trait object’. If you want to read more, check the <a href='https://doc.rust-lang.org/reference/types/trait-object.html' class='text-orange-600-600 hover:underline' target='_blank' rel='noopener'>rust reference</a> on it!
+    </p>
+  
+    <blockquote class='py-0.5 px-4 mb-3 italic border-l-4 bg-gray-50 text-gray-600 border-gray-400 quote'>
+      
+    <p class='mb-3'>
+      What’s a fat pointer?
+    </p>
+  
+    </blockquote>
+  
+    <p class='mb-3'>
+      A fat pointer is a pointer with some associated metadata. In this case it would be a table of methods that correspond to the methods in the <code class='py-0.5 px-0.5 bg-gray-100'>Plugin</code> trait.
+    </p>
+  
+    <p class='mb-3'>
+      The concept of the so-called ‘call table’ is represented through <code class='py-0.5 px-0.5 bg-gray-100'>dyn Plugin</code>. <em>Everytime you see a <code class='py-0.5 px-0.5 bg-gray-100'>dyn</code>, you should think “Ah! It could be anything, so I can only do generic stuff to it”</em>
+    </p>
+  
+    <p class='mb-3'>
+      Now, the issue is that <code class='py-0.5 px-0.5 bg-gray-100'>dyn Plugin</code> is just ‘something’ represented as a table of methods, so how big is it? We can’t know! So Rust prevents us to use it ‘as-is’ and requires us to put it behind some form of pointer. There’s a few we can pick from:
+    </p>
+  
+    <ul class='my-3 ml-6 space-y-1 list-disc'>
+      
+        <li>
+          <code class='py-0.5 px-0.5 bg-gray-100'>&dyn Plugin</code>
+        </li>
+      
+        <li>
+          <code class='py-0.5 px-0.5 bg-gray-100'>Box&lt;dyn Plugin&gt;</code>
+        </li>
+      
+        <li>
+          <code class='py-0.5 px-0.5 bg-gray-100'>Rc&lt;dyn Plugin&gt;</code>
+        </li>
+      
+        <li>
+          <code class='py-0.5 px-0.5 bg-gray-100'>Arc&lt;dyn Plugin&gt;</code>
+        </li>
+      
+    </ul>
+  
+    <p class='mb-3'>
+      And surely more that I’ve missed, they all have different properties, but since we want to ‘own’ the resulting <code class='py-0.5 px-0.5 bg-gray-100'>Plugin</code>s we will use <code class='py-0.5 px-0.5 bg-gray-100'>Box&lt;dyn Plugin&gt;</code>.
+    </p>
+  <h2 id='stepping-up-the-difficulty-contd' class='inline-block mt-6 mb-4 text-4xl font-bold text-gray-700 border-b-2'>Stepping up the difficulty (contd.)</h2>
+    <p class='mb-3'>
+      TODO:
+    </p>
+  
+    <ul class='my-3 ml-6 space-y-1 list-disc'>
+      
+        <li>
+          Explain how to use <code class='py-0.5 px-0.5 bg-gray-100'>Vec&lt;Box&lt;dyn Plugin&gt;&gt;</code>
+        </li>
+      
+        <li>
+          Explain how a second trait is needed to construct it based on a given config
+        </li>
+      
+        <li>
+          Explain how communication can be done
+        </li>
+      
+        <li>
+          Explain how this communication can be typed by using <code class='py-0.5 px-0.5 bg-gray-100'>Box&lt;dyn Any&gt;</code>
         </li>
       
     </ul>
