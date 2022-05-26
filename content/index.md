@@ -1,4 +1,5 @@
-# Hemera's Zettelkasten
+# Welcome
 
-Heya to my little space on the internet. Check out anything that might interest you on the left! I've tried my best to order things!
+Heya! I'm Hemera the Computer Cat. I'm writing here to remember stuff I've learned as well as I've found interesting.
 
+It's a mix of a blog, public TODO list as well as a knowledge base.
