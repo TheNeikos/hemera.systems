@@ -1,6 +1,6 @@
 # Being Dynamic in a Static Language
 
-[Rust](https://rust-lang.org) is a statically compiled language. 
+[[rust]] is a statically compiled language. 
 As such it excels, and is geared towards, static program structures.
 This means that some restrictions apply:
 
@@ -21,6 +21,9 @@ In this case, the idea is be to have a precompiled binary that is
 of its components and wire-up a data flow between them. After several months of
 trying out different systems and continously refining our ideas we've found a
 nice pattern that I want to document here.
+
+**Note**: This is not a tutorial, and more of a guided explanation. __Rust
+knowledge is required!__
 
 ---
 
@@ -62,9 +65,9 @@ impl Plugin for WatchFolder {
 > not specifiying the Error in those `Results`?
 
 Good that you mention those Neikos, they are just placeholders, so that anyone
-reading this don't have to think in 'foos' or 'bars' and instead can just focus
-on the meat of the issue. Whereas for the error type, its not important and
-readers are expected to fill that in. It's not meant to be copy-pasted!
+reading this doesn't have to think in 'foos' or 'bars' and instead can just
+focus on the heart of the issue. Whereas for the error type, its not important
+and readers are expected to fill that in. It's not meant to be copy-pasted!
 
 
 > Won't it just confuse them even more?
@@ -128,4 +131,93 @@ Yeah, well we're doing async stuff! But don't worry, it's all fairly straightfor
 - Since `FuturesUnordered` is a `Stream` I can then collect from that and make
   it a `Result<Vec<_>>`, pass on any errors and get back the watchers!
     - They had to be moved into the future, since we don't want to have borrows in our `Future`s (its generally a headache)
+
+
+## Stepping up the difficulty
+
+What if we now have multiple _kinds_ of plugins? Let's define a new one!
+
+```rust
+struct SimpleWebserver {
+    port: u16,
+    directory: PathBuf,
+    server_handle: Option<ServerHandle>,
+}
+
+impl SimpleWebserver {
+    pub fn new(port: u16, directory: PathBuf) -> Self {
+        SimpleWebserver {
+            port, 
+            directory, 
+            server_handle: None,
+        }
+    }
+}
+
+impl Plugin for SimpleWebserver {
+    async fn starting(&mut self) -> Result<()> {
+        self.server_handle = Some(webserver::start(self.port, &self.directory).await?);
+
+        Ok(())
+    }
+}
+```
+
+> What does the webserver do?
+
+That's just a detail, it could do whatever you want! It's just Rust code after all.
+
+Now, let's try to instantiate both a `WatchFolder` and a `SimpleWebserver`!
+
+```rust
+async fn main() -> Result<()> {
+    let plugins = vec![WatchFolder { path: PathBuf::from("./src") }, SimpleWebserver::new(3456, PathBuf::from(".")];
+
+    // .. call starting, run, and stopping
+}
+```
+
+> Oh-oh! That doesn't compile! They are not of the same type.
+
+Yup, and now we're leaving the static world and making our first steps into the dynamic world.
+
+#### Trait Objects to the rescue
+
+All the way at the top, we've defined our `Plugin` trait. It's a fairly simple
+trait, and thus allows us to pack it behind a fat pointer and 'erase' the
+concrete type, keeping only the information conveyed by the `Plugin` trait.
+This is then called a 'Trait object'. If you want to read more, check the [rust
+reference](https://doc.rust-lang.org/reference/types/trait-object.html) on it!
+
+> What's a fat pointer?
+
+A fat pointer is a pointer with some associated metadata. In this case it would
+be a table of methods that correspond to the methods in the `Plugin` trait.
+
+The concept of the so-called 'call table' is represented through `dyn Plugin`.
+_Everytime you see a `dyn`, you should think "Ah! It could be anything, so I
+can only do generic stuff to it"_
+
+Now, the issue is that `dyn Plugin` is just 'something' represented as a table
+of methods, so how big is it? We can't know! So Rust prevents us to use it
+'as-is' and requires us to put it behind some form of pointer. There's a few we
+can pick from:
+
+- `&dyn Plugin`
+- `Box<dyn Plugin>`
+- `Rc<dyn Plugin>`
+- `Arc<dyn Plugin>`
+
+And surely more that I've missed, they all have different properties, but since
+we want to 'own' the resulting `Plugin`s we will use `Box<dyn Plugin>`.
+
+
+## Stepping up the difficulty (contd.)
+
+TODO:
+
+- Explain how to use `Vec<Box<dyn Plugin>>`
+- Explain how a second trait is needed to construct it based on a given config
+- Explain how communication can be done
+- Explain how this communication can be typed by using `Box<dyn Any>`
 
