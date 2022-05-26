@@ -2,7 +2,10 @@
 # https://github.com/srid/emanote/blob/master/default/index.yaml
 
 page:
-  siteTitle: Hemera's Zettelkasten
+  siteTitle: Hemera's Zettelbox
+  headHtml: |
+    <snippet var="js.mathjax" />
+    <snippet var="js.prism" />
 
 template:
   theme: orange-600
@@ -19,8 +22,3 @@ template:
   # If you are hosting on GitLab Pages, you may want to remove this.
   urlStrategy: pretty
   iconUrl: ${ema:homeUrl}favicon.png
-
-page:
-  headHtml: |
-    <snippet var="js.mathjax" />
-    <snippet var="js.prism" />
