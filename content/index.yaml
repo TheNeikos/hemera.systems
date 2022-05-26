@@ -8,7 +8,7 @@ page:
     <snippet var="js.prism" />
 
 template:
-  theme: orange-600
+  theme: yellow
 
   # Uncomment this to get neuron-style pages
   # name: /templates/layouts/note
@@ -22,3 +22,8 @@ template:
   # If you are hosting on GitLab Pages, you may want to remove this.
   urlStrategy: pretty
   iconUrl: ${ema:homeUrl}favicon.png
+
+pandoc:
+  rewriteClass:
+    figure-block: p-2 rounded text-center bg-${theme}-100 flex flex-col justify-center content-center 
+    aparte: text-xs
