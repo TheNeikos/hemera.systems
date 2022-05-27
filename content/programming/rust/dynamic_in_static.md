@@ -216,8 +216,8 @@ we want to 'own' the resulting `Plugin`s we will use `Box<dyn Plugin>`.
 
 TODO:
 
-- Explain how to use `Vec<Box<dyn Plugin>>`
-- Explain how a second trait is needed to construct it based on a given config
-- Explain how communication can be done
-- Explain how this communication can be typed by using `Box<dyn Any>`
+- [ ] Explain how to use `Vec<Box<dyn Plugin>>`
+- [ ] Explain how a second trait is needed to construct it based on a given config
+- [ ] Explain how communication can be done
+- [ ] Explain how this communication can be typed by using `Box<dyn Any>`
 
