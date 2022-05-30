@@ -21,4 +21,4 @@ They are a way to specify _all_ dependencies in a declarative way through:
 Some important links:
 
 - [NixOS Wiki on Flakes](https://nixos.wiki/wiki/Flakes)
-- [Xe's Blog on Flakes](https://christine.website/blog/nix-flakes-1-2022-02-21)
+- [Xe's Blog on Flakes](https://xeiaso.net/blog/nix-flakes-1-2022-02-21)
