@@ -35,7 +35,7 @@
 
 
   
-  <link href='tailwind.css?instanceId=26c33db0-c306-4d23-92ee-9402c99faa89' rel='stylesheet' type='text/css' />
+  <link href='tailwind.css?instanceId=01bf5022-9971-4157-9b78-374469c775a9' rel='stylesheet' type='text/css' />
 
   <!-- Heist error element -->
   <style type='text/css'>
@@ -670,7 +670,7 @@ impl FancyString {
     }
 }</code></pre></div>
     <p class='mb-3'>
-      After all we are creating a reference <em>in the function and returning it</em>! For some reason this bothered me. You can only return something that outlive the scope it is created in, so what bothered me? Well, the fact that we are ‘reaching into’ the <code class='py-0.5 px-0.5 bg-gray-100'>&self</code> reference and take a reference to a value inside of that to return it! Since <code class='py-0.5 px-0.5 bg-gray-100'>self.0</code> is a <code class='py-0.5 px-0.5 bg-gray-100'>String</code> this feels like we ‘taking’ something out of a shared reference (<code class='py-0.5 px-0.5 bg-gray-100'>&</code>)!
+      After all we are creating a reference <em>in the function and returning it</em>! For some reason this bothered me. You can only return something that outlive the scope it is created in, so what bothered me? Well, the fact that we are ‘reaching into’ the <code class='py-0.5 px-0.5 bg-gray-100'>&self</code> reference and take a reference to a value inside of that to return it! Since <code class='py-0.5 px-0.5 bg-gray-100'>self.0</code> is a <code class='py-0.5 px-0.5 bg-gray-100'>String</code> this feels like we ‘taking’ something out of a shared reference (<code class='py-0.5 px-0.5 bg-gray-100'>&</code>) and then referencing <em>that</em>! This didn’t seem right to me, since Rust exactly prevents shenanigans like that.
     </p>
   
     <p class='mb-3'>
