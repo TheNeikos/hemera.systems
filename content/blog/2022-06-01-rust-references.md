@@ -23,7 +23,8 @@ some reason this bothered me. You can only return something that outlive the
 scope it is created in, so what bothered me? Well, the fact that we are
 'reaching into' the `&self` reference and take a reference to a value inside of
 that to return it! Since `self.0` is a `String` this feels like we 'taking'
-something out of a shared reference (`&`)!
+something out of a shared reference (`&`) and then referencing _that_! This
+didn't seem right to me, since Rust exactly prevents shenanigans like that.
 
 But this code does compile so somewhere my assumption was wrong. After a nice
 chat in the [\#rust matrix channel](https://matrix.to/#/#rust:matrix.org) I've
