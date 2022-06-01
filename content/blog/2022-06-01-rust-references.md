@@ -19,7 +19,7 @@ impl FancyString {
 ```
 
 After all we are creating a reference _in the function and returning it_! For
-some reason this bothered me. You can only return something that outlive the
+some reason this bothered me. You can only return something that outlives the
 scope it is created in, so what bothered me? Well, the fact that we are
 'reaching into' the `&self` reference and take a reference to a value inside of
 that to return it! Since `self.0` is a `String` this feels like we 'taking'
