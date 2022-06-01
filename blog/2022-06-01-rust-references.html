@@ -35,7 +35,7 @@
 
 
   
-  <link href='tailwind.css?instanceId=00e04d0c-7e9e-4513-a503-bd5a09e60048' rel='stylesheet' type='text/css' />
+  <link href='tailwind.css?instanceId=e94977ee-b30a-49c0-8dc5-335d89141a31' rel='stylesheet' type='text/css' />
 
   <!-- Heist error element -->
   <style type='text/css'>
@@ -316,6 +316,45 @@
   
     <a class='font-bold text-yellow-600 hover:underline truncate' title='Returning Rust References' href='blog/2022-06-01-rust-references'>
       Returning Rust References
+    </a>
+    
+      
+  </div>
+
+  <!-- Node's children forest, displayed only on active trees
+    TODO: Use <details> to toggle visibility?
+  -->
+  
+    
+  
+</div>
+    
+      <!-- Variable bindings for this tree-->
+  
+    
+      
+    
+    
+
+
+
+  
+
+
+<!-- Rendering of this tree -->
+<div class='pl-2'>
+  <!-- Node's rootLabel-->
+  <div class='flex items-center my-2 space-x-2 justify-left'>
+    
+    
+      <svg class='w-4 h-4 flex-shrink-0 inline' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+        <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z'>
+        </path>
+      </svg>
+    
+  
+    <a class='hover:underline truncate' title='Writing Letters in France' href='blog/2022-06-01-france-letters'>
+      Writing Letters in France
     </a>
     
       
@@ -670,7 +709,7 @@ impl FancyString {
     }
 }</code></pre></div>
     <p class='mb-3'>
-      After all we are creating a reference <em>in the function and returning it</em>! For some reason this bothered me. You can only return something that outlive the scope it is created in, so what bothered me? Well, the fact that we are ‘reaching into’ the <code class='py-0.5 px-0.5 bg-gray-100'>&self</code> reference and take a reference to a value inside of that to return it! Since <code class='py-0.5 px-0.5 bg-gray-100'>self.0</code> is a <code class='py-0.5 px-0.5 bg-gray-100'>String</code> this feels like we ‘taking’ something out of a shared reference (<code class='py-0.5 px-0.5 bg-gray-100'>&</code>) and then referencing <em>that</em>! This didn’t seem right to me, since Rust exactly prevents shenanigans like that.
+      After all we are creating a reference <em>in the function and returning it</em>! For some reason this bothered me. You can only return something that outlives the scope it is created in, so what bothered me? Well, the fact that we are ‘reaching into’ the <code class='py-0.5 px-0.5 bg-gray-100'>&self</code> reference and take a reference to a value inside of that to return it! Since <code class='py-0.5 px-0.5 bg-gray-100'>self.0</code> is a <code class='py-0.5 px-0.5 bg-gray-100'>String</code> this feels like we ‘taking’ something out of a shared reference (<code class='py-0.5 px-0.5 bg-gray-100'>&</code>) and then referencing <em>that</em>! This didn’t seem right to me, since Rust exactly prevents shenanigans like that.
     </p>
   
     <p class='mb-3'>

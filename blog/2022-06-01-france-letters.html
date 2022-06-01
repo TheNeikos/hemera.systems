@@ -5,14 +5,14 @@
   <meta charset='UTF-8' />
   <meta name='viewport' content='width=device-width, initial-scale=1' />
   <title>
-    Flakes – Hemera's Zettelbox
+    Writing Letters in France – Hemera's Zettelbox
   </title>
   
     
       <meta property='og:description' content />
       <meta property='og:site_name' content="Hemera's Zettelbox" />
       <meta property='og:type' content='website' />
-      <meta property='og:title' content='Flakes' />
+      <meta property='og:title' content='Writing Letters in France' />
     
     
       <base href='/' />
@@ -116,8 +116,8 @@
             </li>
           
             <li class='inline-flex items-center'>
-              <a class='px-1 font-bold' href='nixos'>
-                NixOS and Nix
+              <a class='px-1 font-bold' href='blog'>
+                Blog Entries
               </a>
               <svg fill='currentColor' viewBox='0 0 20 20' class='w-auto h-5 text-gray-400'>
                 <path fill-rule='evenodd' d='M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z' clip-rule='evenodd'></path>
@@ -335,11 +335,7 @@
     
       <!-- Variable bindings for this tree-->
   
-    
-      
-    
-    
-
+  
 
 
   
@@ -352,12 +348,12 @@
     
     
       <svg class='w-4 h-4 flex-shrink-0 inline' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
-        <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z'>
+        <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'>
         </path>
       </svg>
-    
+      
   
-    <a class='hover:underline truncate' title='Writing Letters in France' href='blog/2022-06-01-france-letters'>
+    <a class='font-bold text-yellow-600 hover:underline truncate' title='Writing Letters in France' href='blog/2022-06-01-france-letters'>
       Writing Letters in France
     </a>
     
@@ -530,7 +526,11 @@
     
       <!-- Variable bindings for this tree-->
   
-  
+    
+      
+    
+    
+
 
 
   
@@ -543,12 +543,12 @@
     
     
       <svg class='w-4 h-4 flex-shrink-0 inline' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
-        <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'>
+        <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z'>
         </path>
       </svg>
-      
+    
   
-    <a class='font-bold text-yellow-600 hover:underline truncate' title='Flakes' href='nixos/flakes'>
+    <a class='hover:underline truncate' title='Flakes' href='nixos/flakes'>
       Flakes
     </a>
     
@@ -692,70 +692,26 @@
           <main class='px-4 py-4'>
             <h1 class='flex items-end justify-center mb-4 p-3 bg-yellow-100 text-5xl font-extrabold text-black rounded'>
   <a class='z-40 tracking-tighter '>
-    Flakes
+    Writing Letters in France
   </a>
 </h1>
             <article class='overflow-auto'>
   <!-- What goes in this file will appear on top of note body-->
   
     <p class='mb-3'>
-      Flakes are an upcoming feature of <code class='py-0.5 px-0.5 bg-gray-100'>nix</code> the package manager.
+      I live in France, in the middle of the countryside. I enjoy it here, as its quieter than in a city and the air is, usually, clean. But one thing that it is missing is the density of infrastructure that a city can afford. Of course I knew that coming here, but it is still annoying going to the next town just to post a letter.
     </p>
   
     <p class='mb-3'>
-      They do a lot of things, and I am still trying to grasp it fully.
+      But! I’ve recently learned that the french national mail company <a href='https://laposte.fr' class='text-yellow-600 hover:underline' target='_blank' rel='noopener'>LaPoste</a> also allows you to post letters from your home! I’ve had to send some important letters, but didn’t feel like going out :P! Using their website I could print a simple vignette, stick it to the envelope and just put it in my own postbox! The next day, the postman will pick it up as if you had brough it to a post office.
     </p>
   
     <p class='mb-3'>
-      Here are some thing I’ve found out so far:
+      Amazing, and definitely a win for comfort and not having to go out!
     </p>
-  
-    <p class='mb-3'>
-      They are a way to specify <em>all</em> dependencies in a declarative way through:
-    </p>
-  
-    <ul class='my-3 ml-6 space-y-1 list-disc'>
-      
-        <li>
-          Being explicit about the <code class='py-0.5 px-0.5 bg-gray-100'>inputs</code> of the flake
-    <ul class='my-3 ml-6 space-y-1 list-disc'>
-      
-        <li>
-          In a flake you cannot load local files that are not part of its repository
-        </li>
-      
-        <li>
-          You also cannot load external files without also specifying their sha hash
-        </li>
-      
-    </ul>
-  
-        </li>
-      
-        <li>
-          Streamlining <code class='py-0.5 px-0.5 bg-gray-100'>lock</code> files, to make sure it stays reproducible
-        </li>
-      
-    </ul>
-  <hr class='mb-3' />
-    <p class='mb-3'>
-      Some important links:
-    </p>
-  
-    <ul class='my-3 ml-6 space-y-1 list-disc'>
-      
-        <li>
-          <a href='https://nixos.wiki/wiki/Flakes' class='text-yellow-600 hover:underline' target='_blank' rel='noopener'>NixOS Wiki on Flakes</a>
-        </li>
-      
-        <li>
-          <a href='https://xeiaso.net/blog/nix-flakes-1-2022-02-21' class='text-yellow-600 hover:underline' target='_blank' rel='noopener'>Xe’s Blog on Flakes</a>
-        </li>
-      
-    </ul>
   
   <div class='flex items-center justify-center mt-2'>
-  <a class='text-gray-300 hover:text-yellow-600 text-sm' title='Edit this page on GitHub' href='https://github.com/TheNeikos/hemera.systems/edit/master/content/nixos/flakes.md'>
+  <a class='text-gray-300 hover:text-yellow-600 text-sm' title='Edit this page on GitHub' href='https://github.com/TheNeikos/hemera.systems/edit/master/content/blog/2022-06-01-france-letters.md'>
     <svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
       <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z'></path>
     </svg>
