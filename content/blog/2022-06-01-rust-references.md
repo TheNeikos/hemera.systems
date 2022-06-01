@@ -36,5 +36,12 @@ is something called a 'place' expression. You can read more about them in the
 reference](https://doc.rust-lang.org/reference/expressions.html#place-expressions-and-value-expressions).
 
 But basically place expression evaluate to a _place in memory_, and value
-expressions represent an actual value.
+expressions represent an actual value. Since I am taking a reference to a place
+in memory, the rust compiler can attach to that reference the same lifetime it
+took to get to it in the first place (i.e. the lifetime of `&self`).
+
+And that's why returning that reference is fine, since:
+
+- We are pointing to memory with a 'live' lifetime once we exit (it was an input)
+- We never 'took' the `String` out of `self`, and thus never had a value
 
