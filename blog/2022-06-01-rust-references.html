@@ -5,14 +5,14 @@
   <meta charset='UTF-8' />
   <meta name='viewport' content='width=device-width, initial-scale=1' />
   <title>
-    Rust – Hemera's Zettelbox
+    Returning Rust References – Hemera's Zettelbox
   </title>
   
     
       <meta property='og:description' content />
       <meta property='og:site_name' content="Hemera's Zettelbox" />
       <meta property='og:type' content='website' />
-      <meta property='og:title' content='Rust' />
+      <meta property='og:title' content='Returning Rust References' />
     
     
       <base href='/' />
@@ -116,8 +116,8 @@
             </li>
           
             <li class='inline-flex items-center'>
-              <a class='px-1 font-bold' href='programming'>
-                programming
+              <a class='px-1 font-bold' href='blog'>
+                Blog Entries
               </a>
               <svg fill='currentColor' viewBox='0 0 20 20' class='w-auto h-5 text-gray-400'>
                 <path fill-rule='evenodd' d='M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z' clip-rule='evenodd'></path>
@@ -296,11 +296,7 @@
     
       <!-- Variable bindings for this tree-->
   
-    
-      
-    
-    
-
+  
 
 
   
@@ -313,12 +309,12 @@
     
     
       <svg class='w-4 h-4 flex-shrink-0 inline' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
-        <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z'>
+        <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'>
         </path>
       </svg>
-    
+      
   
-    <a class='hover:underline truncate' title='Returning Rust References' href='blog/2022-06-01-rust-references'>
+    <a class='font-bold text-yellow-600 hover:underline truncate' title='Returning Rust References' href='blog/2022-06-01-rust-references'>
       Returning Rust References
     </a>
     
@@ -569,7 +565,11 @@
     
       <!-- Variable bindings for this tree-->
   
-  
+    
+      
+      
+    
+
 
 
   
@@ -587,7 +587,7 @@
       </svg>
       
   
-    <a class='font-bold text-yellow-600 hover:underline truncate' title='Rust' href='programming/rust'>
+    <a class='font-bold hover:underline truncate' title='Rust' href='programming/rust'>
       Rust
     </a>
     
@@ -653,34 +653,40 @@
           <main class='px-4 py-4'>
             <h1 class='flex items-end justify-center mb-4 p-3 bg-yellow-100 text-5xl font-extrabold text-black rounded'>
   <a class='z-40 tracking-tighter '>
-    Rust
+    Returning Rust References
   </a>
 </h1>
             <article class='overflow-auto'>
   <!-- What goes in this file will appear on top of note body-->
   
     <p class='mb-3'>
-      Rust in this blog is exclusively about the programming language.
+      In <a href='programming/rust' class='text-yellow-600 mavenLinkBold hover:underline' data-wikilink-type='WikiLinkNormal'>Rust</a> you can easily take a reference of any value with the <code class='py-0.5 px-0.5 bg-gray-100'>&</code> operator. But something I’ve been having in the back of my head recently is why the following works:
+    </p>
+  <div class='py-0.5 mb-3 text-sm'><pre><code class='rust language-rust'>struct FancyString(String);
+
+impl FancyString {
+    fn get_str(&self) -&gt; &str {
+        &self.0
+    }
+}</code></pre></div>
+    <p class='mb-3'>
+      After all we are creating a reference <em>in the function and returning it</em>! For some reason this bothered me. You can only return something that outlive the scope it is created in, so what bothered me? Well, the fact that we are ‘reaching into’ the <code class='py-0.5 px-0.5 bg-gray-100'>&self</code> reference and take a reference to a value inside of that to return it! Since <code class='py-0.5 px-0.5 bg-gray-100'>self.0</code> is a <code class='py-0.5 px-0.5 bg-gray-100'>String</code> this feels like we ‘taking’ something out of a shared reference (<code class='py-0.5 px-0.5 bg-gray-100'>&</code>)!
     </p>
   
     <p class='mb-3'>
-      Some links:
+      But this code does compile so somewhere my assumption was wrong. After a nice chat in the <a href='https://matrix.to/#/#rust:matrix.org' class='text-yellow-600 hover:underline' target='_blank' rel='noopener'>#rust matrix channel</a> I’ve found where I went wrong:
     </p>
   
-    <ul class='my-3 ml-6 space-y-1 list-disc'>
-      
-        <li>
-          <a href='https://rust-lang.org' class='text-yellow-600 hover:underline' target='_blank' rel='noopener'>Homepage</a>
-        </li>
-      
-        <li>
-          <a href='https://github.com/TheNeikos?tab=repositories&q=&type=source&language=rust&sort=' class='text-yellow-600 hover:underline' target='_blank' rel='noopener'>My Rust projects</a>
-        </li>
-      
-    </ul>
+    <p class='mb-3'>
+      <code class='py-0.5 px-0.5 bg-gray-100'>self.0</code> is <em>not</em> a ‘value’ expression! There is no value that exists, but this is something called a ‘place’ expression. You can read more about them in the <a href='https://doc.rust-lang.org/reference/expressions.html#place-expressions-and-value-expressions' class='text-yellow-600 hover:underline' target='_blank' rel='noopener'>rust reference</a>.
+    </p>
+  
+    <p class='mb-3'>
+      But basically place expression evaluate to a <em>place in memory</em>, and value expressions represent an actual value.
+    </p>
   
   <div class='flex items-center justify-center mt-2'>
-  <a class='text-gray-300 hover:text-yellow-600 text-sm' title='Edit this page on GitHub' href='https://github.com/TheNeikos/hemera.systems/edit/master/content/programming/rust.md'>
+  <a class='text-gray-300 hover:text-yellow-600 text-sm' title='Edit this page on GitHub' href='https://github.com/TheNeikos/hemera.systems/edit/master/content/blog/2022-06-01-rust-references.md'>
     <svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
       <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z'></path>
     </svg>
@@ -695,43 +701,6 @@
             <div class='flex flex-col lg:flex-row lg:space-x-2'>
               
               
-  <div class='flex-1 p-4 mt-8 bg-gray-100 rounded'>
-    <header class='mb-2 text-xl font-semibold text-gray-500'>Links to this page</header>
-    <ul class='space-y-1'>
-      
-        <li>
-          <a class='text-yellow-600 mavenLinkBold hover:bg-yellow-50' href='blog/2022-06-01-rust-references'>
-            Returning Rust References
-          </a>
-          
-            <div class='mb-4 overflow-auto text-sm text-gray-500'>
-  
-    <div class='pl-2 mt-2 border-l-2 border-yellow-200 hover:border-yellow-500'>
-      <div><p>In <a href='programming/rust' class='text-gray-600 font-bold hover:bg-gray-50' data-wikilink-type='WikiLinkNormal'>Rust</a> you can easily take a reference of any value with the <code>&</code> operator. But something I’ve been having in the back of my head recently is why the following works:</p></div>
-    </div>
-  
-</div>
-          
-        </li>
-      
-        <li>
-          <a class='text-yellow-600 mavenLinkBold hover:bg-yellow-50' href='programming/rust/dynamic_in_static'>
-            Being Dynamic in a Static Language
-          </a>
-          
-            <div class='mb-4 overflow-auto text-sm text-gray-500'>
-  
-    <div class='pl-2 mt-2 border-l-2 border-yellow-200 hover:border-yellow-500'>
-      <div><p><a href='programming/rust' class='text-gray-600 font-bold hover:bg-gray-50' data-wikilink-type='WikiLinkNormal'>Rust</a> is a statically compiled language. As such it excels, and is geared towards, static program structures. This means that some restrictions apply:</p></div>
-    </div>
-  
-</div>
-          
-        </li>
-      
-    </ul>
-  </div>
-
             </div>
             
   <section class='flex flex-wrap items-end justify-center my-4 space-x-2 space-y-2 font-mono text-sm'>
