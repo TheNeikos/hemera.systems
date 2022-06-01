@@ -35,7 +35,7 @@
 
 
   
-  <link href='tailwind.css?instanceId=01bf5022-9971-4157-9b78-374469c775a9' rel='stylesheet' type='text/css' />
+  <link href='tailwind.css?instanceId=00e04d0c-7e9e-4513-a503-bd5a09e60048' rel='stylesheet' type='text/css' />
 
   <!-- Heist error element -->
   <style type='text/css'>
@@ -682,8 +682,24 @@ impl FancyString {
     </p>
   
     <p class='mb-3'>
-      But basically place expression evaluate to a <em>place in memory</em>, and value expressions represent an actual value.
+      But basically place expression evaluate to a <em>place in memory</em>, and value expressions represent an actual value. Since I am taking a reference to a place in memory, the rust compiler can attach to that reference the same lifetime it took to get to it in the first place (i.e. the lifetime of <code class='py-0.5 px-0.5 bg-gray-100'>&self</code>).
     </p>
+  
+    <p class='mb-3'>
+      And that’s why returning that reference is fine, since:
+    </p>
+  
+    <ul class='my-3 ml-6 space-y-1 list-disc'>
+      
+        <li>
+          We are pointing to memory with a ‘live’ lifetime once we exit (it was an input)
+        </li>
+      
+        <li>
+          We never ‘took’ the <code class='py-0.5 px-0.5 bg-gray-100'>String</code> out of <code class='py-0.5 px-0.5 bg-gray-100'>self</code>, and thus never had a value
+        </li>
+      
+    </ul>
   
   <div class='flex items-center justify-center mt-2'>
   <a class='text-gray-300 hover:text-yellow-600 text-sm' title='Edit this page on GitHub' href='https://github.com/TheNeikos/hemera.systems/edit/master/content/blog/2022-06-01-rust-references.md'>
