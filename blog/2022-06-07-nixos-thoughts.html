@@ -5,15 +5,15 @@
   <meta charset='UTF-8' />
   <meta name='viewport' content='width=device-width, initial-scale=1' />
   <title>
-    Anki & Spaced Repititon – Hemera's Zettelbox
+    My Thoughts on NixOS – Hemera's Zettelbox
   </title>
   
     
-      <meta property='og:description' content='I’ve been using Anki for at least 7-8 years now and I found it an amazing way to learn things, however a few things imo are not always spelled out clearly and make it harder to use than it has to be.' />
+      <meta property='og:description' content='I really enjoy ([[nixos]],[Str "NixOS"])NixOS, and have been using it for about two years now. However there’s one thing that has really started to annoy me lately: You cannot easily do partial updates due to how nixpkgs is built.' />
       <meta property='og:site_name' content="Hemera's Zettelbox" />
       <meta property='og:image' content />
       <meta property='og:type' content='website' />
-      <meta property='og:title' content='Anki & Spaced Repititon' />
+      <meta property='og:title' content='My Thoughts on NixOS' />
     
     
       <base href='/' />
@@ -219,7 +219,11 @@
     
       <!-- Variable bindings for this tree-->
   
-  
+    
+      
+    
+    
+
 
 
   
@@ -232,12 +236,12 @@
     
     
       <svg class='w-4 h-4 flex-shrink-0 inline' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
-        <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'>
+        <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z'>
         </path>
       </svg>
-      
+    
   
-    <a class='font-bold text-yellow-600 hover:underline truncate' title='Anki & Spaced Repititon' href='blog/2022-06-04-anki_spaced_repetition'>
+    <a class='hover:underline truncate' title='Anki & Spaced Repititon' href='blog/2022-06-04-anki_spaced_repetition'>
       Anki & Spaced Repititon
     </a>
     
@@ -293,11 +297,7 @@
     
       <!-- Variable bindings for this tree-->
   
-    
-      
-    
-    
-
+  
 
 
   
@@ -310,12 +310,12 @@
     
     
       <svg class='w-4 h-4 flex-shrink-0 inline' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
-        <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z'>
+        <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'>
         </path>
       </svg>
-    
+      
   
-    <a class='hover:underline truncate' title='My Thoughts on NixOS' href='blog/2022-06-07-nixos-thoughts'>
+    <a class='font-bold text-yellow-600 hover:underline truncate' title='My Thoughts on NixOS' href='blog/2022-06-07-nixos-thoughts'>
       My Thoughts on NixOS
     </a>
     
@@ -849,54 +849,30 @@
           <main class='px-4 py-4'>
             <h1 class='flex items-end justify-center mb-4 p-3 bg-yellow-100 text-5xl font-extrabold text-black rounded'>
   <a class='z-40 tracking-tighter '>
-    Anki & Spaced Repititon
+    My Thoughts on NixOS
   </a>
 </h1>
             <article class='overflow-auto'>
   <!-- What goes in this file will appear on top of note body-->
   
     <p class='mb-3'>
-      I’ve been ‘using’ <a href='https://apps.ankiweb.net/' class='text-yellow-600 hover:underline' target='_blank' rel='noopener'>Anki</a> for at least 7-8 years now and I found it an amazing way to learn things, however a few things imo are not always spelled out clearly and make it harder to use than it has to be.
+      I really enjoy <a href='nixos' class='text-yellow-600 mavenLinkBold hover:underline' data-wikilink-type='WikiLinkNormal'>NixOS</a>, and have been using it for about two years now. However there’s one thing that has really started to annoy me lately: You cannot easily do partial updates due to how nixpkgs is built.
     </p>
   
     <p class='mb-3'>
-      Here’s also an <a href='https://ncase.me/remember/' class='text-yellow-600 hover:underline' target='_blank' rel='noopener'>overview of spaced repetition and why its amazing</a>!
+      What I mean by this is, that I want to update only a single piece of software from version 1.2 to 1.3. So I update my nixpkgs input to my flake and rebuild that. However, now <em>every other package</em> that is also part of that nixpkgs input gets rebuild/downloaded. This is not what I intended to do, and there is no clear way of being more precise when it comes to versioning without defining <em>every single package</em> as a different input.
+    </p>
+  <hr class='mb-3' />
+    <p class='mb-3'>
+      When I first heard of NixOS I had a quite different idea of what it actually is. Instead of being a large repository of packages, I thought that it was a large repository of different build instructions, and one can easily specify each version one needs. For example, I wanted to be able to somehow say: “I want firefox at version 72 as well as NodeJS version 8.2”. But what you actually specify is the revision of the whole package tree and pluck things from there.
     </p>
   
     <p class='mb-3'>
-      A list of things I’ve encountered, and ways to help me to stick better to it (its mostly <a href='thoughts/emotional_management' class='text-yellow-600 mavenLinkBold hover:underline' data-wikilink-type='WikiLinkNormal'>Emotional Management</a>):
-    </p>
-  
-    <ul class='my-3 ml-6 space-y-1 list-disc'>
-      
-        <li>
-          
-    <p class='mb-3'>
-      The default amount of ‘new’ cards every day is often waaaay too high for me. I remember it being <em>20</em> at some point. That’s an okay amount to start with (maybe), but definitely <em>not</em> new every day! If your deck is 1000 cards, then you will have all <em>1000</em> items after 50 days!! Definitely not a rate I can sustain. I would prefer if the app would ask you, “Hey, today we’re going to learn X new cards today!” and you can lower or raise the number as needed. Some days I definitely am not in the mood to learn new things, and prefer to just focus on retaining what I already have! It also gave me ever increasing anxiety, knowing that if I start the app today there will be NEW things to learn!
-    </p>
-  
-        </li>
-      
-        <li>
-          
-    <p class='mb-3'>
-      Try to not use decks that you did not make. The exceptions are those you’d have to make anyway. If you’re learning a new language you should definitely download a deck to learn the alphabet, but don’t get the ‘ALL BEGINNER VERBS’ deck just for the sake of it. The reason being that one learns <em>a lot better</em> if there is any kind of reason attached to it. Learning just for the sake of learning isn’t that fruitful. So if the lessons you are currently reading give you new words/phrases/rules definitely write them down/highlight them and then put them in your deck, and that way you get to use them when doing exercises/talking with your teacher. After all learning words/sentences that won’t be used just isn’t that useful.
-    </p>
-  
-        </li>
-      
-    </ul>
-  
-    <p class='mb-3'>
-      Of course all of these apply mostly to me and my personal learning experience, mileage definitely varies.
-    </p>
-  
-    <p class='mb-3'>
-      Happy learning!
+      Hopefully with flakes this becomes easier to manage. However, downloading N revisions of nixpkgs (each about 30MB) does not sound like a great time either…
     </p>
   
   <div class='flex items-center justify-center mt-2'>
-  <a class='text-gray-300 hover:text-yellow-600 text-sm' title='Edit this page on GitHub' href='https://github.com/TheNeikos/hemera.systems/edit/master/content/blog/2022-06-04-anki_spaced_repetition.md'>
+  <a class='text-gray-300 hover:text-yellow-600 text-sm' title='Edit this page on GitHub' href='https://github.com/TheNeikos/hemera.systems/edit/master/content/blog/2022-06-07-nixos-thoughts.md'>
     <svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
       <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z'></path>
     </svg>
