@@ -5,15 +5,15 @@
   <meta charset='UTF-8' />
   <meta name='viewport' content='width=device-width, initial-scale=1' />
   <title>
-    Anki & Spaced Repititon – Hemera's Zettelbox
+    Packaging things in Nix – Hemera's Zettelbox
   </title>
   
     
-      <meta property='og:description' content='I’ve been using Anki for at least 7-8 years now and I found it an amazing way to learn things, however a few things imo are not always spelled out clearly and make it harder to use than it has to be.' />
+      <meta property='og:description' content='([[nixos]],[]) is notoriously underdocumented, and it frankly has no structure that lends itself to be nicely documented. (Maybe ([[flakes]],[]) will provide some relief? I doubt it though.' />
       <meta property='og:site_name' content="Hemera's Zettelbox" />
       <meta property='og:image' content />
       <meta property='og:type' content='website' />
-      <meta property='og:title' content='Anki & Spaced Repititon' />
+      <meta property='og:title' content='Packaging things in Nix' />
     
     
       <base href='/' />
@@ -117,8 +117,8 @@
             </li>
           
             <li class='inline-flex items-center'>
-              <a class='px-1 font-bold' href='blog'>
-                Blog Entries
+              <a class='px-1 font-bold' href='nixos'>
+                NixOS and Nix
               </a>
               <svg fill='currentColor' viewBox='0 0 20 20' class='w-auto h-5 text-gray-400'>
                 <path fill-rule='evenodd' d='M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z' clip-rule='evenodd'></path>
@@ -219,7 +219,11 @@
     
       <!-- Variable bindings for this tree-->
   
-  
+    
+      
+    
+    
+
 
 
   
@@ -232,12 +236,12 @@
     
     
       <svg class='w-4 h-4 flex-shrink-0 inline' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
-        <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'>
+        <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z'>
         </path>
       </svg>
-      
+    
   
-    <a class='font-bold text-yellow-600 hover:underline truncate' title='Anki & Spaced Repititon' href='blog/2022-06-04-anki_spaced_repetition'>
+    <a class='hover:underline truncate' title='Anki & Spaced Repititon' href='blog/2022-06-04-anki_spaced_repetition'>
       Anki & Spaced Repititon
     </a>
     
@@ -644,11 +648,7 @@
     
       <!-- Variable bindings for this tree-->
   
-    
-      
-    
-    
-
+  
 
 
   
@@ -661,12 +661,12 @@
     
     
       <svg class='w-4 h-4 flex-shrink-0 inline' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
-        <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z'>
+        <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'>
         </path>
       </svg>
-    
+      
   
-    <a class='hover:underline truncate' title='Packaging things in Nix' href='nixos/packaging'>
+    <a class='font-bold text-yellow-600 hover:underline truncate' title='Packaging things in Nix' href='nixos/packaging'>
       Packaging things in Nix
     </a>
     
@@ -888,54 +888,58 @@
           <main class='px-4 py-4'>
             <h1 class='flex items-end justify-center mb-4 p-3 bg-yellow-100 text-5xl font-extrabold text-black rounded'>
   <a class='z-40 tracking-tighter '>
-    Anki & Spaced Repititon
+    Packaging things in Nix
   </a>
 </h1>
             <article class='overflow-auto'>
   <!-- What goes in this file will appear on top of note body-->
   
     <p class='mb-3'>
-      I’ve been ‘using’ <a href='https://apps.ankiweb.net/' class='text-yellow-600 hover:underline' target='_blank' rel='noopener'>Anki</a> for at least 7-8 years now and I found it an amazing way to learn things, however a few things imo are not always spelled out clearly and make it harder to use than it has to be.
+      <a href='nixos' class='text-yellow-600 mavenLinkBold hover:underline' data-wikilink-type='WikiLinkNormal'>NixOS and Nix</a> is notoriously underdocumented, and it frankly has no structure that lends itself to be nicely documented. (Maybe <a href='nixos/flakes' class='text-yellow-600 mavenLinkBold hover:underline' data-wikilink-type='WikiLinkNormal'>Flakes</a> will provide some relief? I doubt it though.
     </p>
   
     <p class='mb-3'>
-      Here’s also an <a href='https://ncase.me/remember/' class='text-yellow-600 hover:underline' target='_blank' rel='noopener'>overview of spaced repetition and why its amazing</a>!
+      Until that situation is better, here’s my own documentation on things:
+    </p>
+  <h2 id='getting-node-modules-into-your-env' class='inline-block mt-6 mb-4 text-4xl font-bold text-gray-700 border-b-2'>Getting node modules into your env</h2>
+    <p class='mb-3'>
+      Use <code class='py-0.5 px-0.5 bg-gray-100'>pkgs.yarn2nix-moretea.mkYarnModules</code> to generate a derivation that contains the packages you need through a lock file:
+    </p>
+  <div class='py-0.5 mb-3 text-sm'><pre><code class='nix language-nix'>nodeModules = pkgs.yarn2nix-moretea.mkYarnModules {
+    inherit version;
+    pname = "${project-name}-js-deps";
+    packageJSON = ./package.json;
+    yarnLock = ./yarn.lock;
+};</code></pre></div>
+    <p class='mb-3'>
+      This will create a derivation that contains a <code class='py-0.5 px-0.5 bg-gray-100'>node_modules</code> folder with all the dependencies.
     </p>
   
     <p class='mb-3'>
-      A list of things I’ve encountered, and ways to help me to stick better to it (its mostly <a href='thoughts/emotional_management' class='text-yellow-600 mavenLinkBold hover:underline' data-wikilink-type='WikiLinkNormal'>Emotional Management</a>):
-    </p>
-  
-    <ul class='my-3 ml-6 space-y-1 list-disc'>
-      
-        <li>
-          
-    <p class='mb-3'>
-      The default amount of ‘new’ cards every day is often waaaay too high for me. I remember it being <em>20</em> at some point. That’s an okay amount to start with (maybe), but definitely <em>not</em> new every day! If your deck is 1000 cards, then you will have all <em>1000</em> items after 50 days!! Definitely not a rate I can sustain. I would prefer if the app would ask you, “Hey, today we’re going to learn X new cards today!” and you can lower or raise the number as needed. Some days I definitely am not in the mood to learn new things, and prefer to just focus on retaining what I already have! It also gave me ever increasing anxiety, knowing that if I start the app today there will be NEW things to learn!
-    </p>
-  
-        </li>
-      
-        <li>
-          
-    <p class='mb-3'>
-      Try to not use decks that you did not make. The exceptions are those you’d have to make anyway. If you’re learning a new language you should definitely download a deck to learn the alphabet, but don’t get the ‘ALL BEGINNER VERBS’ deck just for the sake of it. The reason being that one learns <em>a lot better</em> if there is any kind of reason attached to it. Learning just for the sake of learning isn’t that fruitful. So if the lessons you are currently reading give you new words/phrases/rules definitely write them down/highlight them and then put them in your deck, and that way you get to use them when doing exercises/talking with your teacher. After all learning words/sentences that won’t be used just isn’t that useful.
-    </p>
-  
-        </li>
-      
-    </ul>
-  
-    <p class='mb-3'>
-      Of course all of these apply mostly to me and my personal learning experience, mileage definitely varies.
+      In this case, I wanted to have <code class='py-0.5 px-0.5 bg-gray-100'>tailwind</code> access to more packages. So, I had to add the <code class='py-0.5 px-0.5 bg-gray-100'>nodeModules</code> derivation to the <code class='py-0.5 px-0.5 bg-gray-100'>NODE_PATH</code> env variable.
     </p>
   
     <p class='mb-3'>
-      Happy learning!
+      Luckily, this is possible with the <code class='py-0.5 px-0.5 bg-gray-100'>makeWrapper</code> helper:
+    </p>
+  <div class='py-0.5 mb-3 text-sm'><pre><code class='nix language-nix'>tailwind = pkgs.stdenv.mkDerivation {
+    inherit version;
+    pname = "${pname}-tailwindcss";
+
+    nativeBuildInputs = [ pkgs.makeWrapper ];
+
+    buildCommand = ''
+        mkdir -p $out/bin
+        makeWrapper ${pkgs.nodePackages.tailwindcss}/bin/tailwindcss $out/bin/tailwindcss \
+            --prefix NODE_PATH ":" "${nodeModules}/node_modules"
+    '';
+};</code></pre></div>
+    <p class='mb-3'>
+      This prefixed the <code class='py-0.5 px-0.5 bg-gray-100'>NODE_PATH</code> env variable with a path to the <code class='py-0.5 px-0.5 bg-gray-100'>node_modules</code> folder that we built earlier. This way, <code class='py-0.5 px-0.5 bg-gray-100'>tailwind</code> will find whatever we gave it.
     </p>
   
   <div class='flex items-center justify-center mt-2'>
-  <a class='text-gray-300 hover:text-yellow-600 text-sm' title='Edit this page on GitHub' href='https://github.com/TheNeikos/hemera.systems/edit/master/content/blog/2022-06-04-anki_spaced_repetition.md'>
+  <a class='text-gray-300 hover:text-yellow-600 text-sm' title='Edit this page on GitHub' href='https://github.com/TheNeikos/hemera.systems/edit/master/content/nixos/packaging.md'>
     <svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
       <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z'></path>
     </svg>
