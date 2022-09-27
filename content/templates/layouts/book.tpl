@@ -28,6 +28,10 @@
                   </path>
                 </svg>
               </a>
+              <a title="Search (Ctrl+K)" class="cursor-pointer"
+                onclick="window.emanote.stork.toggleSearch()">
+                <apply template="components/stork/stork-icon" />
+              </a>
             </div>
 
             <div id="site-logo" class="pl-2">

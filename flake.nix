@@ -6,7 +6,10 @@
     emanote.url = "github:srid/emanote/master";
     # ema.url = "github:srid/ema/multisite"; # To workaround follows bug
     nixpkgs.follows = "emanote/nixpkgs";
-    flake-utils.follows = "emanote/flake-utils";
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, flake-utils, emanote, nixpkgs, ... }@inputs:
@@ -27,7 +30,7 @@
                 text = ''
                   set -xe
                   export PORT="''${EMANOTE_PORT:-7072}"
-                  cd ./content && ${emanote.defaultPackage.${system}}/bin/emanote run --port "$PORT"
+                  cd ./content && ${emanote.packages.${system}.default}/bin/emanote run --port "$PORT"
                 '';
               };
               program = "${script}/bin/emanoteRun.sh";
