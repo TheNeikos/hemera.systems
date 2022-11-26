@@ -1,6 +1,6 @@
 # About
 
-Some infos about me:
+You can find me on these platforms:
 
 <ul>
     <li class="flex items-center">
