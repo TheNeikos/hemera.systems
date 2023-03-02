@@ -40,3 +40,102 @@ println!("{info:#?}");
 ```
 
 It's a rough outline, but it shows what we want to ultimately achieve: Given a string of data, we want to deserialize it into our typed struct.
+
+
+## Writing the `Deserialize` definition and implementation
+
+To get a good idea of what kind of data we might need, let's start by writing the `Deserialize` implementation. Designing data flow from the back to the front is in my opinion the ideal way to proceed, as this allows you to see what is required from what comes before.
+
+An example `Deserialize` definition could look like this:
+
+```rust
+trait Deserialize {
+  fn deserialize(input: &[u8]) -> Result<Self, DeserializeError>;
+}
+```
+
+But I consider multiple things problematic already:
+
+1. `input` is formless data. What kind of format is this? JSON? TOML? It's unclear
+1. `DeserializeError` could either not be exhaustive enough, if its an enum, or not typed when it's just a custom string
+
+To fix point 1 we have to think about what it means to "input data" from an implementors point of view.
+
+Imagine this implementation (input type intentionally left blank):
+
+```rust
+impl Deserialize for Information {
+  fn deserialize(input: _) -> Result<Self, DeserializeError> {
+     let orders: Vec<u32> = input.get_vector();
+     let name: String = input.get_string();
+     let value: f32 = input.get_f32();
+     
+     Ok(Information { orders, name, value })
+  }
+}
+```
+
+Aha! We make it easy for ourselves, instead of trying to decode the input, we just... ask the input to provide that information to us! 
+This allows us to add a layer of indirection in between the type to-be-deserialized and the deserializer (who calls 'deserialize').
+
+
+To rephrase this step: Instead of receiving the raw input data directly, we put a 'something' between that input and the implementation, and use that something to get the much more convenient methods like `get_string`.
+This is called an indirection and it decouples the method from the input. 
+I can at least imagine that requesting a string from JSON or YAML should both work, or any other similar format.
+
+
+
+Thinking a bit more about this step we notice another issue, it seems to not only be order dependent, but we don't even tell it what kind of fields we're expecting...
+
+Let's try to fix that.
+
+
+```rust
+impl Deserialize for Information {
+  fn deserialize(input: _) -> Result<Self, DeserializeError> {
+     let orders: Vec<u32> = input.get_vector("orders");
+     let name: String = input.get_string("name");
+     let value: f32 = input.get_f32("value");
+     
+     Ok(Information { orders, name, value })
+  }
+}
+```
+
+A simple change, but what does it mean for our input? Not good news sadly. 
+By choosing this interface, we are _forcing_ `input` to _first_ give us something that corresponds to the the "orders" field, even if maybe "name" came first! 
+This is bad news for all but the most pedantic encoding formats. 
+I don't think that forcing your input to be in a specific order is a good thing. 
+It also makes it harder for you, the programmer! 
+Because now you can't change the field order without breaking all existing inputs!
+Is there something we can do to fix this?
+
+### Going deeper
+
+To recap, we want to be able to say 'give me a string' or 'give me an f32', but we should not be forced to specify the order!
+This sounds like another indirection to me!
+Let's think about how such a data flow could look like for our `Information` object:
+
+1. `input` tells us we have a "name" object, thus we know that we are about to receive a `String`!
+2. `input` tells us we have a "value" object, thus we know that we are about to receive a `f32`!
+3. `input` tells us we have a "orders" object, thus we know that we are about to receive a `Vec<u32>`!
+
+
+One thing has become apparent, it is no longer _us_ that dictate what we are about to receive, but the `input` object.
+This pattern of an outside object calling specific methods on an object you provide is called the visitor pattern in this instance!
+
+> A small side note. I consider most online resources on the visitor pattern to be more confusing than helpful.
+> While I still think that you should try to see if you can find something that clicks for you online, I can try to resume it here in a few sentences:
+> The visitor pattern allows you to decouple (i.e. seperate) the form of an object (its structure) and an algorithm operating on it.
+> In our concrete situation, the structure is the `Information` struct, and the algorithm is "I have decoded a specific field, how do you want to handle it?"
+
+Let's just call the trait `Visitor` so that there is a common interface. It will have methods for all the kinds of 'shape' of data we want to handle.
+In our case, we just have a struct so far.
+
+```rust
+trait Visitor {
+  fn visit_
+}
+```
+
+
