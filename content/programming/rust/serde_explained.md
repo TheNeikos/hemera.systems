@@ -129,13 +129,74 @@ This pattern of an outside object calling specific methods on an object you prov
 > The visitor pattern allows you to decouple (i.e. seperate) the form of an object (its structure) and an algorithm operating on it.
 > In our concrete situation, the structure is the `Information` struct, and the algorithm is "I have decoded a specific field, how do you want to handle it?"
 
-Let's just call the trait `Visitor` so that there is a common interface. It will have methods for all the kinds of 'shape' of data we want to handle.
-In our case, we just have a struct so far.
+Let's just call the trait `Visitor` so that there is a common interface. 
+It will have methods for all the kinds of 'shape' of data we want to handle and return the object it can collect from any of the calls.
+
+In our case, we just have the ability to receive structs so far.
 
 ```rust
 trait Visitor {
-  fn visit_
+  type Output;
+  fn visit_struct(self, st: SI) -> Output where SI: StructInfo;
+}
+
+trait StructInfo {
+  fn next_key(&mut self) -> Option<String>;
+  fn next_value<T>(&mut self) -> T;
 }
 ```
 
+Let's go over what we just defined. The `Visitor` trait methods will be called by the `input` we receive. Currently we can only visit structs. We also receive a `StructInfo` object where the actual data is encoded. The reason why we have to go through the StructInfo trait is because we don't know how the data looks like! (Remember our first try, and how that did not work at all).
 
+From here, implementing our Deserialize could go something like this:
+
+```rust
+impl Deserialize for Information {
+  fn deserialize(input: _) -> Result<Self, DeserializeError> {
+    struct InformationVisitor;
+    
+    impl Visitor for InformationVisitor {
+      type Output = Information;
+      
+      fn visit_struct(self, mut st: SI) -> Information 
+        where SI: StructInfo {
+        let mut orders: Option<Vec<u32>> = None;
+        let mut name: Option<String> = None;
+        let mut value: Option<f32> = None;
+
+        while let Some(key) = st.next_key() {
+          match key {
+            "orders" => {
+              orders = Some(st.next_value::<Vec<u32>>());
+            }
+            "name" => {
+              name = Some(st.next_value::<String>());
+            }
+            "value" => {
+              value = Some(st.next_value::<f32>());
+            }
+            key => {
+              panic!("Unknown key '{key}'");
+            }
+          }
+        }
+        
+        Information {
+          orders: orders.unwrap(),
+          name: name.unwrap(),
+          value: value.unwrap(),
+        }
+      }
+    }
+    
+    input.deserialize(InformationVisitor);
+  }
+}
+```
+
+Phew, that's a lot of typing, but it should be clear what we're doing. 
+First we declare the new `InformationVisitor` and have it use the given `StructInfo` to construct an `Information` object. 
+As you can see we are also order independent! 
+There are still some minor tweaks one can do, like for example check for duplicates, but those are left as an exercise to the reader 😉 !
+
+## Nailing down what `input` is
