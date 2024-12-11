@@ -36,6 +36,18 @@ pkg-config needs and allows them to be discovered.
 When building `nameoflibrary` you do the usual building steps but you also need
 to place a `.pc` file at `$out/lib/pkgconfig/libnameoflibrary.pc`.
 
+Luckily nixpkgs provides such a helper to create this:
+
+`makePkgconfigItem` and `copyPkgconfigItems`.
+
+The commit that added them has some info on how they are used:
+https://github.com/NixOS/nixpkgs/commit/7249b8a2f3318bb03c50429f5907015e99901c0b
+
+[Thanks Kiskae for the pointer!](https://hachyderm.io/@Kiskae/113634590760671566)
+
+> [!warn]
+> The method below works, but the above is easier.
+
 Example content:
 
 ```pkgconfig
