@@ -15,3 +15,11 @@ Sometimes one simply wants to write a quick script, or some other text file in a
 The easiest way to achieve that is with the 'trivial' builders that nixpkgs has to offer.
 
 [Their descriptions in the manual](https://nixos.org/manual/nixpkgs/unstable/#chap-trivial-builders)
+
+## Virtual Machine tests
+
+Nix has some cool infrastructure to test anything you can in a configuration of multiple virtual machines.
+
+It has some warts, as the test script is written in python... But overall, it gets its job done.
+
+[Manual](https://nixos.org/manual/nixos/stable/#sec-running-nixos-tests)
