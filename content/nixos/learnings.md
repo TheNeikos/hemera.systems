@@ -23,3 +23,31 @@ Nix has some cool infrastructure to test anything you can in a configuration of 
 It has some warts, as the test script is written in python... But overall, it gets its job done.
 
 [Manual](https://nixos.org/manual/nixos/stable/#sec-running-nixos-tests)
+
+## Getting a reproducible build time in flakes
+
+Flakes, like anything in `nix` are meant to be reproducible. The way this is
+usually achieved is to set some static time, like `1` in the unix epoch.
+
+But this is 1970... So lots of stuff will display as being decades old.
+
+But flakes are always (I think?) `git` repositories and as such you _have_ a
+reproducible time, that also gets exposed.
+
+This now needs to be transformed to something more standardized:
+
+This will spit out a date in ISO8601 format, in UTC.
+
+```nix
+created =
+  let
+    sub = from: len: builtins.substring from len inputs.self.lastModifiedDate;
+    year = sub 0 4;
+    month = sub 4 2;
+    day = sub 6 2;
+    hour = sub 8 2;
+    minute = sub 10 2;
+    second = sub 12 2;
+  in
+  "${year}-${month}-${day}T${hour}:${minute}:${second}Z";
+```
