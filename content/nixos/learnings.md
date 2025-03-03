@@ -51,3 +51,30 @@ created =
   in
   "${year}-${month}-${day}T${hour}:${minute}:${second}Z";
 ```
+
+## Using custom callpackage
+
+The `callPackage` pattern in NixOS is very powerful and useful.
+
+One can create your own little `callPackage` for use with your own packages,
+using `lib.callPackageWith <set>`. This returns a function just like
+`callPackage`. If one now makes `set` recursive, this will automagically
+resolve it all.
+
+Originall found on: https://summer.nixos.org/blog/callpackage-a-tool-for-the-lazy/
+
+```nix
+# default.nix
+let
+  pkgs = import <nixpkgs> { };
+  callPackage = lib.callPackageWith (pkgs // packages);
+  packages = {
+    a = callPackage ./a.nix { };
+    b = callPackage ./b.nix { };
+    c = callPackage ./c.nix { };
+    d = callPackage ./d.nix { };
+    e = callPackage ./e.nix { };
+  };
+in
+  packages
+```
